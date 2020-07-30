@@ -26,8 +26,6 @@ public class SignUp {
 
     @PostMapping("/signup")
     public  String getUserFormData(@ModelAttribute("userFormDataObject") User userFormDataObject, Model model) {
-        System.out.println("userFormDataObject :" + userFormDataObject.getFirstName() + " " + userFormDataObject.getLastName());
-        System.out.println(userFormDataObject.getUsername() + " " + userFormDataObject.getPassword());
 
         String signupError = null;
 
