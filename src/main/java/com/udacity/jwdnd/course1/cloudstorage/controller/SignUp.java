@@ -20,7 +20,6 @@ public class SignUp {
     @GetMapping("/signup")
     public  String getSignUpPage(@ModelAttribute("userFormDataObject") User userFormDataObject)
     {
-        System.out.println("Inside SignUP Controller");
         return "signup";
     }
 
@@ -39,11 +38,8 @@ public class SignUp {
             }
         }
 
-        if (signupError == null) {
-            model.addAttribute("signupSuccess", true);
-        } else {
-            model.addAttribute("signupError", signupError);
-        }
+        if (signupError == null) { model.addAttribute("signupSuccess", true); }
+        else { model.addAttribute("signupError", signupError); }
 
         return "signup";
     }

@@ -1,32 +1,34 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.FileEntity;
+import com.udacity.jwdnd.course1.cloudstorage.services.FileUploadService;
+import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.List;
 
 
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
-    public  String getHomePage()
+    @Autowired
+    private  UserService userService;
+
+    @Autowired
+    private  FileUploadService fileUploadService;
+
+
+    @RequestMapping("/home")
+    public  String getHomePage(Authentication auth, Model model)
     {
-        System.out.println("Inside HomePage Controller");
+        Integer UID = userService.getuid(auth.getName()) ;
+        List<FileEntity> files = fileUploadService.getAllFiles(UID);
+        model.addAttribute("files",files);
         return "home";
     }
-
-// Lesson4 - 14
-//    @PostMapping("/upload")
-//    public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload, Model model) throws IOException {
-//        InputStream fis = fileUpload.getInputStream();
-//        System.out.println("Inside File Upload Controller");
-//        return "home";
-//    }
-
 }
