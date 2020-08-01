@@ -20,4 +20,10 @@ public interface FileUploadMapper {
     @Select("SELECT * FROM FILES WHERE files.userid = #{userId}")
     List<FileEntity> findFilesByUserId(@Param("userId") Integer userId);
 
+    @Delete("Delete FROM FILES  WHERE fileId = #{fileId}")
+    int deleteUserFile(Integer userId);
+
+    @Select("SELECT fileid FROM FILES WHERE username = #{username} and filename = #{fileNameToDelete}")
+    Integer getFileId(String fileNameToDelete , String username);
+
 }

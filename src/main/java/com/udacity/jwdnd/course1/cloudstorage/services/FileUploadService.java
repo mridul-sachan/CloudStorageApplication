@@ -16,7 +16,7 @@ public class FileUploadService {
         this.fileUploadMapper = fileUploadMapper;
     }
 
-   public int addFile(FileEntity fileEntity)
+    public int addFile(FileEntity fileEntity)
    {
        return fileUploadMapper.insertFile(fileEntity);
    }
@@ -24,5 +24,9 @@ public class FileUploadService {
     public List<FileEntity> getAllFiles(Integer userId) {
         return fileUploadMapper.findFilesByUserId(userId);
     }
+
+    public int deleteFile(String fileNameToDelete, String username) {
+        Integer fileId = fileUploadMapper.getFileId(fileNameToDelete, username);
+        return fileUploadMapper.deleteUserFile(fileId); }
 
 }

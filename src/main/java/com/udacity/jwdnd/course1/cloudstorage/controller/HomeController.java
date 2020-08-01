@@ -31,4 +31,18 @@ public class HomeController {
         model.addAttribute("files",files);
         return "home";
     }
+
+    @RequestMapping("/result")
+    public String result() {
+        return "result";
+    }
+
+    String fileNameToDelete = "fileName";
+
+    @RequestMapping("/delete")
+    public String deleteFiles(Authentication auth, Model model)
+    {
+        fileUploadService.deleteFile(fileNameToDelete, auth.getName());
+        return "result";
+    }
 }

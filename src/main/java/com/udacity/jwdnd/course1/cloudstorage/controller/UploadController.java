@@ -9,10 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class UploadController {
@@ -23,17 +26,17 @@ public class UploadController {
     @Autowired
     private  FileUploadService fileUploadService;
 
-//    public UploadController(UserService userService, FileUploadService fileUploadService) {
-//        this.userService = userService;
-//        this.fileUploadService = fileUploadService;
-//    }
 
     @GetMapping("/upload")
-    public String getFiles(@RequestParam("fileUpload") MultipartFile fileUpload)
+    public String getFiles(@RequestParam("fileUpload") MultipartFile fileUpload, Authentication auth,
+                           RedirectAttributes redirectAttributes, Model model)
     {
-        return "home";
+            Integer UID = userService.getuid(auth.getName()) ;
+            List<FileEntity> files = fileUploadService.getAllFiles(UID);
+            model.addAttribute("files",files);
+            return "home";
+        //return "redirect:/home";
     }
-
 
     @PostMapping("/upload")
         public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,Authentication auth, Model model) throws IOException {
@@ -44,7 +47,7 @@ public class UploadController {
         FileEntity fileEntity = new FileEntity(fileUpload.getOriginalFilename(),fileUpload.getContentType(),fs,UID,fileData);
         fileUploadService.addFile(fileEntity);
 
-       return "home";
+       return "result";
     }
 
 }
