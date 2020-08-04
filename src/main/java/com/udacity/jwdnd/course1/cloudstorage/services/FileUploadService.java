@@ -25,8 +25,11 @@ public class FileUploadService {
         return fileUploadMapper.findFilesByUserId(userId);
     }
 
-    public int deleteFile(String fileNameToDelete, String username) {
-        Integer fileId = fileUploadMapper.getFileId(fileNameToDelete, username);
+    public int deleteFile(Integer fileId) {
         return fileUploadMapper.deleteUserFile(fileId); }
+
+        public FileEntity getFilebyId(Integer fileId){
+        return fileUploadMapper.findFileById(fileId);
+        }
 
 }

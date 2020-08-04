@@ -23,7 +23,6 @@ public interface FileUploadMapper {
     @Delete("Delete FROM FILES  WHERE fileId = #{fileId}")
     int deleteUserFile(Integer userId);
 
-    @Select("SELECT fileid FROM FILES WHERE username = #{username} and filename = #{fileNameToDelete}")
-    Integer getFileId(String fileNameToDelete , String username);
-
+    @Select("SELECT * FROM FILES WHERE files.fileid = #{fileId}")
+    FileEntity findFileById(@Param("fileId") Integer fileId);
 }
