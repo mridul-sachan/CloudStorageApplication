@@ -14,5 +14,7 @@ public interface NotesEntityMapper {
     @Options(useGeneratedKeys = true, keyProperty = "noteId")
     int insertNewNotes(NotesEntity newNote);
 
+    @Select("SELECT * FROM NOTES WHERE notes.userid = #{userId}")
+    List<NotesEntity> findNotesByUserId(@Param("userId") Integer userId);
 
 }

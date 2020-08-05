@@ -7,10 +7,10 @@ public class NotesEntity {
     private String noteDescription;
     private String noteTitle;
 
-    public NotesEntity(Integer noteId, Integer userId, String noteDesription, String noteTitle) {
+    public NotesEntity(Integer noteId, Integer userId, String noteDescription, String noteTitle) {
         this.noteId = noteId;
         this.userId = userId;
-        this.noteDescription = noteDesription;
+        this.noteDescription = noteDescription;
         this.noteTitle = noteTitle;
     }
 
@@ -34,8 +34,8 @@ public class NotesEntity {
         return noteDescription;
     }
 
-    public void setNoteDescription(String noteDesription) {
-        this.noteDescription = noteDesription;
+    public void setNoteDescription(String noteDescription) {
+        this.noteDescription = noteDescription;
     }
 
     public String getNoteTitle() {

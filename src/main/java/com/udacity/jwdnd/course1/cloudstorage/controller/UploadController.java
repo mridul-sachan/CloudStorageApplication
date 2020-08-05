@@ -25,17 +25,6 @@ public class UploadController {
     @Autowired
     private  FileUploadService fileUploadService;
 
-    @GetMapping("/upload")
-    public String getFiles(@RequestParam("fileUpload") MultipartFile fileUpload, Authentication auth,
-                           RedirectAttributes redirectAttributes, Model model)
-    {
-            Integer UID = userService.getuid(auth.getName()) ;
-            List<FileEntity> files = fileUploadService.getAllFiles(UID);
-            model.addAttribute("files",files);
-            return "home";
-        //return "redirect:/home";
-    }
-
     @PostMapping("/upload")
         public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,Authentication auth, Model model) throws IOException {
         Integer UID = userService.getuid(auth.getName()) ;
@@ -47,5 +36,4 @@ public class UploadController {
 
        return "result";
     }
-
 }

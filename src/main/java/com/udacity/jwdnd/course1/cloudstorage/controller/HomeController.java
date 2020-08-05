@@ -41,6 +41,8 @@ public class HomeController {
     {
         Integer UID = userService.getuid(auth.getName()) ;
         List<FileEntity> files = fileUploadService.getAllFiles(UID);
+        List<NotesEntity> notes = createNotesService.getAllNotes(UID);
+        model.addAttribute("notes",notes);
         model.addAttribute("files",files);
         return "home";
     }
@@ -78,7 +80,6 @@ public class HomeController {
         Integer UID = userService.getuid(auth.getName()) ;
         credentials.setUserId(UID);
         credentialService.createNewCredential(credentials);
-
         return "result";
     }
 }
