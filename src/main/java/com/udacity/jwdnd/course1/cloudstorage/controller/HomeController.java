@@ -42,8 +42,10 @@ public class HomeController {
         Integer UID = userService.getuid(auth.getName()) ;
         List<FileEntity> files = fileUploadService.getAllFiles(UID);
         List<NotesEntity> notes = createNotesService.getAllNotes(UID);
+        List<CredentialsEntity> credentials = credentialService.getAllCredentials(UID);
         model.addAttribute("notes",notes);
         model.addAttribute("files",files);
+        model.addAttribute("credentials",credentials);
         return "home";
     }
 

@@ -7,7 +7,14 @@ public class NotesEntity {
     private String noteDescription;
     private String noteTitle;
 
-    public NotesEntity(Integer noteId, Integer userId, String noteDescription, String noteTitle) {
+//    public NotesEntity(Integer noteId, Integer userId, String noteDescription, String noteTitle) {
+//        this.noteId = noteId;
+//        this.userId = userId;
+//        this.noteDescription = noteDescription;
+//        this.noteTitle = noteTitle;
+//    }
+
+    public NotesEntity(Integer noteId, String noteTitle, String noteDescription, Integer userId) {
         this.noteId = noteId;
         this.userId = userId;
         this.noteDescription = noteDescription;

@@ -5,6 +5,8 @@ import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CredentialService {
 
@@ -15,4 +17,6 @@ public class CredentialService {
     {
         return credentialMapper.insertNewCredential(ce);
     }
+
+    public List<CredentialsEntity> getAllCredentials(Integer userId){ return credentialMapper.findCredentialsByUserId(userId); }
 }

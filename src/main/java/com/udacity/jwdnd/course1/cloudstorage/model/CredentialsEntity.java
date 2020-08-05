@@ -3,19 +3,19 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 public class CredentialsEntity {
 
     private Integer credentialId;
+    private String url;
+    private String userName;
     private String key;
     private String  password;
-    private String url;
     private Integer userId;
-    private String userName;
 
-    public CredentialsEntity(Integer credentialId, String key, String password, String url, Integer userId, String userName) {
+    public CredentialsEntity(Integer credentialId, String url, String userName, String key, String password, Integer userId) {
         this.credentialId = credentialId;
+        this.url = url;
+        this.userName = userName;
         this.key = key;
         this.password = password;
-        this.url = url;
         this.userId = userId;
-        this.userName = userName;
     }
 
     public Integer getCredentialId() {

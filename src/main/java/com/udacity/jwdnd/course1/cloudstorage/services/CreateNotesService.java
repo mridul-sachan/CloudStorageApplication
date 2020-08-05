@@ -11,14 +11,11 @@ import java.util.List;
 @Service
 public class CreateNotesService {
 
-    private NotesEntityMapper notesEntityMapper;
+    private final NotesEntityMapper notesEntityMapper;
 
     public CreateNotesService(NotesEntityMapper notesEntityMapper) { this.notesEntityMapper = notesEntityMapper; }
 
-    public int createNewNote(NotesEntity ne)
-    {
-       return notesEntityMapper.insertNewNotes(ne);
-    }
+    public int createNewNote(NotesEntity ne) { return notesEntityMapper.insertNewNotes(ne); }
 
     public  List<NotesEntity> getAllNotes(Integer userId){
         return notesEntityMapper.findNotesByUserId(userId);
