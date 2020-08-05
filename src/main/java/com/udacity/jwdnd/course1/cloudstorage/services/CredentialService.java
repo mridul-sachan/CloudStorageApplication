@@ -19,4 +19,6 @@ public class CredentialService {
     }
 
     public List<CredentialsEntity> getAllCredentials(Integer userId){ return credentialMapper.findCredentialsByUserId(userId); }
+
+    public int deletecredential(Integer credentialId){return credentialMapper.deleteUserCredential(credentialId);}
 }

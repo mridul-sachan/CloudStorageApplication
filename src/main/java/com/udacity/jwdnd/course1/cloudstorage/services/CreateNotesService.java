@@ -20,4 +20,6 @@ public class CreateNotesService {
     public  List<NotesEntity> getAllNotes(Integer userId){
         return notesEntityMapper.findNotesByUserId(userId);
     }
+
+    public int deleteNote(Integer noteId) { return notesEntityMapper.deleteUserNote(noteId); }
 }

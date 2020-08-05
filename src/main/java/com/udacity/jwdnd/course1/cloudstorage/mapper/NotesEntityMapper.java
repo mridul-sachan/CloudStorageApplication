@@ -17,4 +17,7 @@ public interface NotesEntityMapper {
     @Select("SELECT * FROM NOTES WHERE notes.userid = #{userId}")
     List<NotesEntity> findNotesByUserId(@Param("userId") Integer userId);
 
+    @Delete("Delete FROM NOTES  WHERE noteId = #{noteId}")
+    int deleteUserNote(Integer noteId);
+
 }

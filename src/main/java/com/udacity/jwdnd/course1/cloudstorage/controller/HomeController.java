@@ -77,11 +77,21 @@ public class HomeController {
         return "result";
     }
 
+    @GetMapping("/note/delete/{noteId}")
+    public String deleteNote(@PathVariable Integer noteId) {
+        createNotesService.deleteNote(noteId); return "result";
+    }
+
     @PostMapping("/addCredentials")
     public String credentialController(@ModelAttribute("userNotesObject") CredentialsEntity credentials, Authentication auth){
         Integer UID = userService.getuid(auth.getName()) ;
         credentials.setUserId(UID);
         credentialService.createNewCredential(credentials);
         return "result";
+    }
+
+    @GetMapping("/credential/delete/{credentialId}")
+    public String deleteCredential(@PathVariable Integer credentialId) {
+        credentialService.deletecredential(credentialId); return "result";
     }
 }
