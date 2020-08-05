@@ -1,6 +1,10 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsEntity;
 import com.udacity.jwdnd.course1.cloudstorage.model.FileEntity;
+import com.udacity.jwdnd.course1.cloudstorage.model.NotesEntity;
+import com.udacity.jwdnd.course1.cloudstorage.services.CreateNotesService;
+import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileUploadService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,11 @@ public class HomeController {
     private  UserService userService;
     @Autowired
     private  FileUploadService fileUploadService;
+    @Autowired
+    private CreateNotesService createNotesService;
+    @Autowired
+    private CredentialService credentialService;
+
 
     @RequestMapping("/home")
     public  String getHomePage(Authentication auth, Model model)
@@ -53,5 +62,23 @@ public class HomeController {
                 .contentType(MediaType.parseMediaType(file.getContentType())).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""
                 + file.getFileName() + "\"").body(new
                 ByteArrayResource(file.getFileData()));
+    }
+
+    @PostMapping("/createNotes")
+    public String notesController(@ModelAttribute("userNotesObject") NotesEntity userNotesObject, Authentication auth){
+        Integer UID = userService.getuid(auth.getName()) ;
+        userNotesObject.setUserId(UID);
+        createNotesService.createNewNote(userNotesObject);
+
+        return "result";
+    }
+
+    @PostMapping("/addCredentials")
+    public String credentialController(@ModelAttribute("userNotesObject") CredentialsEntity credentials, Authentication auth){
+        Integer UID = userService.getuid(auth.getName()) ;
+        credentials.setUserId(UID);
+        credentialService.createNewCredential(credentials);
+
+        return "result";
     }
 }

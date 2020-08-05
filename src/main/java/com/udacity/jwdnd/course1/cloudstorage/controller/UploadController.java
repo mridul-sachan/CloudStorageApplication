@@ -22,10 +22,8 @@ public class UploadController {
 
     @Autowired
     private  UserService userService;
-
     @Autowired
     private  FileUploadService fileUploadService;
-
 
     @GetMapping("/upload")
     public String getFiles(@RequestParam("fileUpload") MultipartFile fileUpload, Authentication auth,
@@ -43,7 +41,7 @@ public class UploadController {
         Integer UID = userService.getuid(auth.getName()) ;
         String fs = String.valueOf(fileUpload.getSize());
         byte fileData[] = fileUpload.getBytes();
-
+        if(fileData.length == 0) return "result"; //File cant be empty
         FileEntity fileEntity = new FileEntity(fileUpload.getOriginalFilename(),fileUpload.getContentType(),fs,UID,fileData);
         fileUploadService.addFile(fileEntity);
 

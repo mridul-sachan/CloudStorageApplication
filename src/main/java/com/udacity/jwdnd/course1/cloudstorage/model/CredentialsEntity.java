@@ -6,15 +6,15 @@ public class CredentialsEntity {
     private String key;
     private String  password;
     private String url;
-    private Integer Id;
+    private Integer userId;
     private String userName;
 
-    public CredentialsEntity(Integer credentialId, String key, String password, String url, Integer id, String userName) {
+    public CredentialsEntity(Integer credentialId, String key, String password, String url, Integer userId, String userName) {
         this.credentialId = credentialId;
         this.key = key;
         this.password = password;
         this.url = url;
-        Id = id;
+        this.userId = userId;
         this.userName = userName;
     }
 
@@ -50,12 +50,12 @@ public class CredentialsEntity {
         this.url = url;
     }
 
-    public Integer getId() {
-        return Id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        Id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

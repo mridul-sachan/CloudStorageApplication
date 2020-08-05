@@ -4,13 +4,13 @@ public class NotesEntity {
 
     private Integer noteId;
     private Integer userId;
-    private String noteDesription;
+    private String noteDescription;
     private String noteTitle;
 
     public NotesEntity(Integer noteId, Integer userId, String noteDesription, String noteTitle) {
         this.noteId = noteId;
         this.userId = userId;
-        this.noteDesription = noteDesription;
+        this.noteDescription = noteDesription;
         this.noteTitle = noteTitle;
     }
 
@@ -30,12 +30,12 @@ public class NotesEntity {
         this.userId = userId;
     }
 
-    public String getNoteDesription() {
-        return noteDesription;
+    public String getNoteDescription() {
+        return noteDescription;
     }
 
-    public void setNoteDesription(String noteDesription) {
-        this.noteDesription = noteDesription;
+    public void setNoteDescription(String noteDesription) {
+        this.noteDescription = noteDesription;
     }
 
     public String getNoteTitle() {

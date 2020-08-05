@@ -9,9 +9,6 @@ import java.util.List;
 @Mapper
 public interface FileUploadMapper {
 
-    @Select("SELECT * FROM FILES  WHERE userId = #{userId}")
-    User getUserFiles(Integer userId);
-
     @Insert("INSERT INTO FILES  (filename, contenttype, filesize, userid, filedata) VALUES(#{fileName}, #{contentType},#{fileSize}, #{userId}, #{fileData})")
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
     int insertFile(FileEntity uploadedFile);
