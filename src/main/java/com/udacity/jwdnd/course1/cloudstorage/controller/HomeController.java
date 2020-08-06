@@ -70,17 +70,16 @@ public class HomeController {
 
     @PostMapping("/createNotes")
     public String notesController(@ModelAttribute("userNotesObject") NotesEntity userNotesObject, Authentication auth){
+
+        if(userNotesObject.getNoteId() != null)
+        {
+            createNotesService.updateNotes(userNotesObject);
+            return "result";
+        }
         Integer UID = userService.getuid(auth.getName()) ;
         userNotesObject.setUserId(UID);
         createNotesService.createNewNote(userNotesObject);
-
         return "result";
-    }
-
-    @PostMapping("/note/delete/{noteId}")
-    public String updateNote(@PathVariable Integer noteId,@ModelAttribute("notesEntity") NotesEntity notesEntity, Authentication auth) {
-        notesEntity.setNoteId(noteId);
-        createNotesService.updateNotes(notesEntity); return "result";
     }
 
     @GetMapping("/note/delete/{noteId}")
@@ -89,7 +88,7 @@ public class HomeController {
     }
 
     @PostMapping("/addCredentials")
-    public String credentialController(@ModelAttribute("userNotesObject") CredentialsEntity credentials, Authentication auth){
+    public String credentialController(@ModelAttribute("credentials") CredentialsEntity credentials, Authentication auth){
         Integer UID = userService.getuid(auth.getName()) ;
         credentials.setUserId(UID);
         credentialService.createNewCredential(credentials);
