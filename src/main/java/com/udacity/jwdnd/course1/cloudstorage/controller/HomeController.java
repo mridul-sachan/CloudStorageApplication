@@ -3,10 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsEntity;
 import com.udacity.jwdnd.course1.cloudstorage.model.FileEntity;
 import com.udacity.jwdnd.course1.cloudstorage.model.NotesEntity;
-import com.udacity.jwdnd.course1.cloudstorage.services.CreateNotesService;
-import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
-import com.udacity.jwdnd.course1.cloudstorage.services.FileUploadService;
-import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -34,11 +31,14 @@ public class HomeController {
     private CreateNotesService createNotesService;
     @Autowired
     private CredentialService credentialService;
+    @Autowired
+    private EncryptionService encryptionService;
 
 
     @RequestMapping("/home")
     public  String getHomePage(Authentication auth, Model model)
     {
+
         Integer UID = userService.getuid(auth.getName()) ;
         List<FileEntity> files = fileUploadService.getAllFiles(UID);
         List<NotesEntity> notes = createNotesService.getAllNotes(UID);
@@ -46,6 +46,9 @@ public class HomeController {
         model.addAttribute("notes",notes);
         model.addAttribute("files",files);
         model.addAttribute("credentials",credentials);
+
+        model.addAttribute("encryptionService", encryptionService);
+
         return "home";
     }
 

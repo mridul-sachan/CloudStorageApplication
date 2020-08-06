@@ -31,20 +31,4 @@ public class HashService {
 
         return Base64.getEncoder().encodeToString(hashedValue);
     }
-    public String decryptValue(String data, String key) {
-        byte[] decryptedValue = null;
-
-        try {
-            Cipher cipher = Cipher.getInstance("APBKDF2WithHmacSHA1");
-            SecretKey secretKey = new SecretKeySpec(key.getBytes(), "AES");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            decryptedValue = cipher.doFinal(Base64.getDecoder().decode(data));
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
-            logger.error(e.getMessage());
-        }
-
-        System.out.println("decryptedValue "+decryptedValue);
-
-        return new String(decryptedValue);
-    }
 }
