@@ -13,7 +13,6 @@ public interface FileUploadMapper {
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
     int insertFile(FileEntity uploadedFile);
 
-
     @Select("SELECT * FROM FILES WHERE files.userid = #{userId}")
     List<FileEntity> findFilesByUserId(@Param("userId") Integer userId);
 
@@ -22,4 +21,7 @@ public interface FileUploadMapper {
 
     @Select("SELECT * FROM FILES WHERE files.fileid = #{fileId}")
     FileEntity findFileById(@Param("fileId") Integer fileId);
+
+    @Select("SELECT filename FROM FILES WHERE files.userid = #{userId} and files.filename = #{filename}")
+    String DuplicateFiles(@Param("userId") Integer userId, String filename);
 }

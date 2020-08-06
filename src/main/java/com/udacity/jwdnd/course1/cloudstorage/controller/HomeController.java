@@ -39,7 +39,6 @@ public class HomeController {
     @RequestMapping("/home")
     public  String getHomePage(Authentication auth, Model model)
     {
-
         Integer UID = userService.getuid(auth.getName()) ;
         List<FileEntity> files = fileUploadService.getAllFiles(UID);
         List<NotesEntity> notes = createNotesService.getAllNotes(UID);
@@ -47,8 +46,6 @@ public class HomeController {
         model.addAttribute("notes",notes);
         model.addAttribute("files",files);
         model.addAttribute("credentials",credentials);
-
-        model.addAttribute("encryptionService", encryptionService);
 
         return "home";
     }

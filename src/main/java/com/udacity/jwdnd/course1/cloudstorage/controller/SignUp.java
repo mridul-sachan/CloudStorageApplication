@@ -33,7 +33,7 @@ public class SignUp {
         }
         if (signupError == null) {
             int rowsAdded = userService.createUser(userFormDataObject);
-            if (rowsAdded < 0) {
+            if (rowsAdded < 1) {
                 signupError = "There was an error signing you up. Please try again.";
             }
         }

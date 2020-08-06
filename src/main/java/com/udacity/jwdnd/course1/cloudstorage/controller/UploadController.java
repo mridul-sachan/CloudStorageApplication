@@ -27,12 +27,29 @@ public class UploadController {
 
     @PostMapping("/upload")
         public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,Authentication auth, Model model) throws IOException {
+
+        String fileUploadError = null;
+
         Integer UID = userService.getuid(auth.getName()) ;
         String fs = String.valueOf(fileUpload.getSize());
         byte fileData[] = fileUpload.getBytes();
-        if(fileData.length == 0) return "result"; //File cant be empty
+        if(fileData.length == 0) { //File cant be empty
+            fileUploadError = "Invalid File Found. Please try again";
+            return "result";
+        }
+
+        if (fileUploadService.isDuplicateFileName(UID,fileUpload.getOriginalFilename())) {
+            fileUploadError = "The File with same name already exists.";
+            return "result";
+        }
+
         FileEntity fileEntity = new FileEntity(fileUpload.getOriginalFilename(),fileUpload.getContentType(),fs,UID,fileData);
-        fileUploadService.addFile(fileEntity);
+        int rowsAdded = fileUploadService.addFile(fileEntity);
+        if(rowsAdded < 1){
+            fileUploadError = "There was an error uploading File. Please try again.";}
+
+        if (fileUploadError == null) { model.addAttribute("fileUploadSuccess", true); }
+        else { model.addAttribute("fileUploadError", fileUploadError); }
 
        return "result";
     }
