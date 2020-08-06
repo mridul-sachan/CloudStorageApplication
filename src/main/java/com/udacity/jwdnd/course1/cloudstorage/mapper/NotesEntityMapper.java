@@ -20,4 +20,7 @@ public interface NotesEntityMapper {
     @Delete("Delete FROM NOTES  WHERE noteId = #{noteId}")
     int deleteUserNote(Integer noteId);
 
+    @Update("UPDATE NOTES " + "SET noteTitle = #{noteTitle}, noteDescription = #{noteDescription} " + "WHERE noteId = #{noteId}")
+    int updateNote(NotesEntity neUpdate);
+
 }

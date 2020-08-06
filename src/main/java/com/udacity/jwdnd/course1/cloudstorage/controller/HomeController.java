@@ -77,6 +77,12 @@ public class HomeController {
         return "result";
     }
 
+    @PostMapping("/note/delete/{noteId}")
+    public String updateNote(@PathVariable Integer noteId,@ModelAttribute("notesEntity") NotesEntity notesEntity, Authentication auth) {
+        notesEntity.setNoteId(noteId);
+        createNotesService.updateNotes(notesEntity); return "result";
+    }
+
     @GetMapping("/note/delete/{noteId}")
     public String deleteNote(@PathVariable Integer noteId) {
         createNotesService.deleteNote(noteId); return "result";

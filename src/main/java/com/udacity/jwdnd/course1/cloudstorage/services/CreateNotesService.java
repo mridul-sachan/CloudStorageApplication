@@ -22,4 +22,7 @@ public class CreateNotesService {
     }
 
     public int deleteNote(Integer noteId) { return notesEntityMapper.deleteUserNote(noteId); }
+
+    public int updateNotes(NotesEntity neUpdate){
+        return notesEntityMapper.updateNote(neUpdate); }
 }
