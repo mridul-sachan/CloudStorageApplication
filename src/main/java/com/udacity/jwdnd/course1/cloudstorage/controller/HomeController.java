@@ -71,11 +71,7 @@ public class HomeController {
     @PostMapping("/createNotes")
     public String notesController(@ModelAttribute("userNotesObject") NotesEntity userNotesObject, Authentication auth){
 
-        if(userNotesObject.getNoteId() != null)
-        {
-            createNotesService.updateNotes(userNotesObject);
-            return "result";
-        }
+        if(userNotesObject.getNoteId() != null) { createNotesService.updateNotes(userNotesObject); return "result"; }
         Integer UID = userService.getuid(auth.getName()) ;
         userNotesObject.setUserId(UID);
         createNotesService.createNewNote(userNotesObject);
@@ -89,6 +85,8 @@ public class HomeController {
 
     @PostMapping("/addCredentials")
     public String credentialController(@ModelAttribute("credentials") CredentialsEntity credentials, Authentication auth){
+
+        if(credentials.getCredentialId() != null) { credentialService.updateCredential(credentials); return "result"; }
         Integer UID = userService.getuid(auth.getName()) ;
         credentials.setUserId(UID);
         credentialService.createNewCredential(credentials);

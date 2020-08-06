@@ -1,5 +1,10 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
+import com.udacity.jwdnd.course1.cloudstorage.services.HashService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.security.SecureRandom;
+
 public class CredentialsEntity {
 
     private Integer credentialId;
@@ -27,7 +32,10 @@ public class CredentialsEntity {
     }
 
     public String getKey() {
-        return key;
+        SecureRandom random = new SecureRandom();
+        byte salt [] = new byte[16];
+        random.nextBytes(salt);
+        return salt.toString();
     }
 
     public void setKey(String key) {
@@ -39,7 +47,7 @@ public class CredentialsEntity {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
     }
 
     public String getUrl() {
