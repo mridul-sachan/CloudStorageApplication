@@ -1,6 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.mapper;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsEntity;
+import com.udacity.jwdnd.course1.cloudstorage.model.FileEntity;
 import com.udacity.jwdnd.course1.cloudstorage.model.NotesEntity;
 import org.apache.ibatis.annotations.*;
 
@@ -21,4 +22,10 @@ public interface CredentialMapper {
 
     @Update("UPDATE CREDENTIALS " + "SET url = #{url}, userName = #{username} , password =#{password}" + "WHERE credentialId = #{credentialId}")
     int updateCredential(CredentialsEntity ceUpdate);
+
+    @Select("SELECT * FROM CREDENTIALS WHERE credentialId  = #{credentialId }")
+    CredentialsEntity findByCredentialId(@Param("credentialId") Integer credentialId);
+
+    @Select("SELECT `key` FROM CREDENTIALS WHERE credentialId  = #{credentialId }")
+    String findKey(@Param("credentialId") Integer credentialId);
 }

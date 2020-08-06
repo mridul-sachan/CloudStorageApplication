@@ -2,7 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsEntity;
-import com.udacity.jwdnd.course1.cloudstorage.model.NotesEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +28,6 @@ public class CredentialService {
         String encryptedPassword = encryptionService.encryptValue(ce.getPassword(),encodedSalt);
         ce.setPassword(encryptedPassword);
 
-        System.out.println("Decrypted Pass :"+encryptionService.decryptValue(encryptedPassword,encodedSalt));
-
         return credentialMapper.insertNewCredential(ce);
     }
 
@@ -38,6 +35,16 @@ public class CredentialService {
 
     public int deletecredential(Integer credentialId){return credentialMapper.deleteUserCredential(credentialId);}
 
-    public int updateCredential(CredentialsEntity ceUpdate){ return credentialMapper.updateCredential(ceUpdate); }
+    public int updateCredential(CredentialsEntity ceUpdate){
+        String encodedSalt = credentialMapper.findKey(ceUpdate.getCredentialId());
+        String encryptedPassword = encryptionService.encryptValue(ceUpdate.getPassword(),encodedSalt);
+        ceUpdate.setPassword(encryptedPassword);
+
+        return credentialMapper.updateCredential(ceUpdate);
+    }
+
+    public CredentialsEntity decodePassword(Integer credentialId){
+        return credentialMapper.findByCredentialId(credentialId);
+    }
 
 }

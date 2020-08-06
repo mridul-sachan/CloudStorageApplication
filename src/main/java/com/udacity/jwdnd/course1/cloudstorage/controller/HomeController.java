@@ -16,8 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -99,5 +100,18 @@ public class HomeController {
     @GetMapping("/credential/delete/{credentialId}")
     public String deleteCredential(@PathVariable Integer credentialId) {
         credentialService.deletecredential(credentialId); return "result";
+    }
+
+    @GetMapping(value = "/decode-password")
+    @ResponseBody
+    public Map<String, String> decodePassword(@RequestParam Integer credentialId){
+        CredentialsEntity credential = credentialService.decodePassword(credentialId);
+        String encryptedPassword = credential.getPassword();
+        String encodedKey = credential.getKey();
+        EncryptionService encryptionService = new EncryptionService();
+        String decryptedPassword = encryptionService.decryptValue(encryptedPassword, encodedKey);
+        Map<String, String> response = new HashMap<>();
+        response.put("decryptedPassword", decryptedPassword);
+        return response;
     }
 }
